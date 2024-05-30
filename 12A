@@ -1,0 +1,24 @@
+def f(x, a0, a1, a2, a3):
+    return a0 + a1*x + a2*x**2 + a3*x**3
+
+def bisection_method(f, a0, a1, a2, a3, a, b, epsilon):
+    if f(a, a0, a1, a2, a3) * f(b, a0, a1, a2, a3) > 0:
+        print("Корень не найден в данном отрезке.")
+        return None
+    
+    while (b - a) / 2.0 > epsilon:
+        c = (a + b) / 2.0
+        if f(c, a0, a1, a2, a3) == 0:
+            return c
+        elif f(c, a0, a1, a2, a3) * f(a, a0, a1, a2, a3) < 0:
+            b = c
+        else:
+            a = c
+    return (a + b) / 2.0
+
+a0, a1, a2, a3 = 29, 6, 10, -1
+a, b = 0, 3
+epsilon = 1e-5  # Изменим точность до 1e-5 для более точного результата
+
+root = bisection_method(f, a0, a1, a2, a3, a, b, epsilon)
+print("Корень полинома на отрезке x ∈ [0;3] методом половинного деления: ", root)
