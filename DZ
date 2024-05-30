@@ -1,0 +1,30 @@
+                  1 2 -3 
+                  5 -6 7
+                 -9 10 11
+
+def find_positive_sum(column):
+    return sum([elem for elem in column if elem > 0])
+
+def find_min_positive_sum(matrix):
+    min_sum = float('inf')
+    min_col_index = -1
+    for col_index in range(len(matrix[0])):
+        column = [row[col_index] for row in matrix]
+        positive_sum = find_positive_sum(column)
+        if positive_sum < min_sum:
+            min_sum = positive_sum
+            min_col_index = col_index
+    return min_col_index
+
+def get_column(matrix, col_index):
+    return [row[col_index] for row in matrix]
+
+# Чтение матрицы из файла
+with open('matrix.txt', 'r') as file:
+    matrix = [[int(num) for num in line.split()] for line in file]
+
+min_col_index = find_min_positive_sum(matrix)
+min_column = get_column(matrix, min_col_index)
+
+print("Столбец с наименьшей суммой положительных элементов:")
+print(min_column)
